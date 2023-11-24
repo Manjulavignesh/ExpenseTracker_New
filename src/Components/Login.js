@@ -1,14 +1,18 @@
 import { useRef, useState } from "react";
 import { Card } from "react-bootstrap";
-
 const Login = () => {
-  const [newUser, setNewUser] = useState(true);
+  document.body.style.backgroundImage =
+  "url('https://wallpapercave.com/wp/Quyisg0.jpg')";
+  const [newUser, setNewUser] = useState(false);
   const emailInput = useRef();
   const passwordInput = useRef();
   const confirmPassword=useRef();
   const LoginHandler = () => {
     setNewUser(false);
   };
+  const passwordHandler=()=>{
+    console.log("I am wokring")
+  }
   const signUpHandler = () => {
     setNewUser(true);
   };
@@ -16,9 +20,8 @@ const Login = () => {
     e.preventDefault();
     const Email = emailInput.current.value;
     const Password = passwordInput.current.value;
-    const confirmPass=confirmPassword.current.value;
     if (newUser) {
-      if(Email.includes("@")!=true || Password.length<4 || confirmPass<4)
+      if(Email.includes("@")!=true || Password.length<4 || confirmPassword.current.value<4)
     {
       let message1="1.Email must includes-@ symbol";
       let message2="2.password & confirm password must contain 4 charcters";
@@ -37,8 +40,7 @@ const Login = () => {
           }),
           headers: { "content-type": "application/json" },
         }
-      )
-        .then((res) => {
+      ).then((res) => {
           if (res.ok) {
             console.log("User has successfully signed up")
           }
@@ -50,7 +52,39 @@ const Login = () => {
         .catch((err) => {
           alert(err);
         });
-      }}
+      }
+    }
+    else{
+      fetch(
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDTAr60Md60DA5Loqu7YAgbAbYNOMvo-7w",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email: Email,
+            password: Password,
+            returnSecureToken: true,
+          }),
+          headers: { "content-type": "application/json" },
+        }
+      )
+      .then((res) => {
+          if (res.ok) {
+            window.location.href="http://localhost:3000/welcomepage"
+            return res.json();
+          } else {
+            return res.json().then((data) => {
+              let errorMessage = "Wrong credential...Please check entered user details";
+              throw new Error(errorMessage);
+            });
+          }
+        })
+        .then((data) => {
+          localStorage.setItem("token", data.idToken);
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    }
   };
   return (
     <div>
@@ -130,6 +164,7 @@ const Login = () => {
                 LogIn
               </button>
             )}
+            {!newUser && <a href="" style={{padding:"0px 115px"}} onClick={passwordHandler}>Forgot password</a>}
             {newUser  && (
               <button
                 style={{
@@ -153,7 +188,7 @@ const Login = () => {
                   onClick={signUpHandler}
                   style={{
                     width: "95%",
-                    marginTop: 65,
+                    marginTop: 40,
                     padding: "12px 20px",
                     marginLeft: 10,
                     borderRadius: "4px",
