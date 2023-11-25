@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { Card } from "react-bootstrap";
+import ForgotPasswordWindow from "./ForgotPasswordWindow";
 const Login = () => {
   document.body.style.backgroundImage =
   "url('https://wallpapercave.com/wp/Quyisg0.jpg')";
@@ -10,9 +11,6 @@ const Login = () => {
   const LoginHandler = () => {
     setNewUser(false);
   };
-  const passwordHandler=()=>{
-    console.log("I am wokring")
-  }
   const signUpHandler = () => {
     setNewUser(true);
   };
@@ -164,7 +162,7 @@ const Login = () => {
                 LogIn
               </button>
             )}
-            {!newUser && <a href="" style={{padding:"0px 115px"}} onClick={passwordHandler}>Forgot password</a>}
+            {!newUser && <a href="http://localhost:3000/forgotpassword" style={{padding:"0px 115px"}} >Forgot password</a>}
             {newUser  && (
               <button
                 style={{

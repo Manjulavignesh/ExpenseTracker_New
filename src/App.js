@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import Updateprofile from "./Components/UpdateProfile";
 import { useEffect } from "react";
 import VerifyEmail from "./Components/VerifyEmail";
+import ForgotPasswordWindow from "./Components/ForgotPasswordWindow";
 function App() {
   const handleContentLoaded= () => {
     const Name=document.getElementById("name");
@@ -43,6 +44,7 @@ useEffect(()=>{
         <Route path="/welcomepage" element={<WelcomeScreen/>}/>
         <Route path="/profile" element={<Updateprofile/>}/>
         <Route path="/verifyEmail" element={<VerifyEmail/>}/>
+        <Route path="/Forgotpassword" element={<ForgotPasswordWindow/>}/>
       </Routes>
       </BrowserRouter>
   );
