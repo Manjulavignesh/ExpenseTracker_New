@@ -4,6 +4,7 @@ import WelcomeScreen from "./Components/WelcomeScreen";
 import { BrowserRouter } from "react-router-dom";
 import Updateprofile from "./Components/UpdateProfile";
 import { useEffect } from "react";
+import VerifyEmail from "./Components/VerifyEmail";
 function App() {
   const handleContentLoaded= () => {
     const Name=document.getElementById("name");
@@ -49,6 +50,7 @@ useEffect(()=>{
         <Route path="/" element={<Login />} />
         <Route path="/welcomepage" element={<WelcomeScreen/>}/>
         <Route path="/profile" element={<Updateprofile/>}/>
+        <Route path="/verifyEmail" element={<VerifyEmail/>}/>
       </Routes>
       </BrowserRouter>
   );

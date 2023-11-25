@@ -69,7 +69,7 @@ const Login = () => {
       )
       .then((res) => {
           if (res.ok) {
-            window.location.href="http://localhost:3000/welcomepage"
+            window.location.href="http://localhost:3000/verifyEmail"
             return res.json();
           } else {
             return res.json().then((data) => {
