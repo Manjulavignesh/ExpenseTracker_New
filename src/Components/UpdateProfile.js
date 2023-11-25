@@ -10,6 +10,7 @@ const Updateprofile = () => {
     const enteredName=name.current.value;
     const enteredUrl=url.current.value;
     const token=localStorage.getItem("token");
+    if(localStorage.getItem("Edited")==null){
     fetch(
         "https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyDTAr60Md60DA5Loqu7YAgbAbYNOMvo-7w",
         {
@@ -25,6 +26,7 @@ const Updateprofile = () => {
       )
         .then((res) => {
           if (res.ok) {
+            localStorage.setItem("Edited",true);
            console.log("details updated sucessfully")
           } else {
             return res.json().then((data) => {
@@ -35,9 +37,8 @@ const Updateprofile = () => {
         })
         .catch((err) => {
           alert(err.message);
-        });
-        name.current.value="";
-        url.current.value="";
+        });}
+        
   };
   return (
     <div>
@@ -110,6 +111,7 @@ const Updateprofile = () => {
             Full Name:
           </label>
           <input
+          id="name"
             style={{
               display: "inline-block",
               verticalAlign: "middle",
@@ -143,6 +145,7 @@ const Updateprofile = () => {
             Profile Photo URL
           </label>
           <input
+          id="url"
             style={{
               display: "inline-block",
               verticalAlign: "middle",
