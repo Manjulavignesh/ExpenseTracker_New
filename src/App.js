@@ -22,21 +22,13 @@ function App() {
          ).then((res) => {
              if (res.ok) {
                return res.json();
-             } else {
-               return res.json().then((data) => {
-                 let errorMessage = "Data not retrived";
-                 throw new Error(errorMessage);
-               });
-             }
+             } 
            })
            .then((data) => {
-            if(Name && URL){
+            if(Name && URL && data){
            Name.value=data.users[0].displayName;
            URL.value=data.users[0].photoUrl;
             }  
-           })
-           .catch((err) => {
-             alert(err.message);
            })
    
   }

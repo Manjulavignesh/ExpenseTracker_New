@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { Card } from "react-bootstrap";
 import { AiFillGithub } from "react-icons/ai";
 import { AiOutlineGlobal } from "react-icons/ai";
+import Logout from "./Logout";
 const Updateprofile = () => {
   const name = useRef();
   const url = useRef();
@@ -42,16 +43,18 @@ const Updateprofile = () => {
   };
   return (
     <div>
+      <Logout/>
       <div>
         <h4 style={{ fontStyle: "italic" }}>
           Winners never quite,Quiters never win.
           <Card
             style={{
-              float: "right",
+              float:"right",
               width: 400,
               borderRadius: "7px",
-              display: "inline",
+              display:"inline",
               background: "#efd1c6",
+              marginRight:25
             }}
           >
             your profile is 64% completed.A complete Profile has higher chances
