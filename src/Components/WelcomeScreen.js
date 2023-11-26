@@ -1,9 +1,11 @@
 import { Card } from "react-bootstrap";
 import Logout from "./Logout";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import AddExpense from "./AddExpense";
+import axios from "axios";
+import { Ctx } from "../App";
 const WelcomeScreen = () => {
-  const [expense, setExpense] = useState([]);
+  const [expense,setExpense]=useContext(Ctx);
   const money = useRef();
   const description = useRef();
   const Catagory = useRef();
@@ -13,9 +15,15 @@ const WelcomeScreen = () => {
     const desRef = description.current.value;
     const catagoryRef = Catagory.current.value;
     const obj = { amt: moneyRef, reason: desRef, catagoryobj: catagoryRef };
+    axios
+      .post(
+        "https://expensetracker-authentic-6234a-default-rtdb.firebaseio.com/expense.json",
+        obj
+      )
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
     setExpense([...expense, obj]);
   };
-  console.log(expense);
   return (
     <div>
       <Logout />
@@ -119,7 +127,9 @@ const WelcomeScreen = () => {
           borderColor: "white",
           marginTop: 10,
         }}
-      ><AddExpense expense={expense}/></Card>
+      >
+      <AddExpense expense={expense} />
+      </Card>
     </div>
   );
 };

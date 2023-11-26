@@ -8,5 +8,5 @@ const PrintExpense = (props) => {
       </h2>
     </div>
   );
-};
+};  
 export default PrintExpense;
