@@ -3,7 +3,7 @@ import Logout from "./Logout";
 import { useContext, useRef, useState } from "react";
 import AddExpense from "./AddExpense";
 import axios from "axios";
-import { Ctx } from "../App";
+import { Ctx } from "../App"; 
 const WelcomeScreen = () => {
   const [expense,setExpense]=useContext(Ctx);
   const money = useRef();
@@ -23,6 +23,9 @@ const WelcomeScreen = () => {
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
     setExpense([...expense, obj]);
+    money.current.value="";
+    description.current.value="";
+    Catagory.current.value="";
   };
   return (
     <div>
@@ -70,6 +73,7 @@ const WelcomeScreen = () => {
               borderColor: "white",
             }}
             ref={money}
+            id="Amt"
           />
           <input
             type="text"
@@ -82,6 +86,7 @@ const WelcomeScreen = () => {
               borderColor: "white",
             }}
             ref={description}
+            id="Des"
           />
           <select
             style={{
@@ -93,8 +98,9 @@ const WelcomeScreen = () => {
               borderColor: "white",
             }}
             ref={Catagory}
+            id="Cat"
           >
-            <option value="" selected>
+            <option value="">
               Select Catagory
             </option>
             <option>Food</option>
