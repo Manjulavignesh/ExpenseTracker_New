@@ -1,7 +1,10 @@
 import axios from "axios";
 import { useContext } from "react";
 import { Ctx } from "../App";
+import { useSelector } from "react-redux";
 const PrintExpense = (props) => {
+  const total=useSelector((state)=>state.expense.total)
+  console.log(total);
     const [expense,setExpense]=useContext(Ctx);
     const editHandler=()=>{
         const Amt=document.getElementById("Amt");
@@ -69,6 +72,7 @@ const PrintExpense = (props) => {
             background: "white",
             fontWeight: 750,
             fontSize: 15,
+            marginTop:5
           }}
           onClick={removeHandler}
         >
@@ -84,11 +88,28 @@ const PrintExpense = (props) => {
             background: "white",
             fontWeight: 750,
             fontSize: 15,
+            marginTop:5
           }}
           onClick={editHandler}
         >
           Edit
         </button>
+       {total>10000 && <button
+          style={{
+            marginLeft:150,
+            marginTop:0,
+            width: 150,
+            height: 30,
+            borderRadius: "15px",
+            borderColor: "white",
+            background: "white",
+            fontWeight: 750,
+            fontSize: 15,
+          }}
+          onClick={editHandler}
+        >
+          Activate Premium
+        </button>}
       </h2>
     </div>}
     </div>

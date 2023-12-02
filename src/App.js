@@ -7,9 +7,12 @@ import React, { useEffect, useState } from "react";
 import VerifyEmail from "./Components/VerifyEmail";
 import ForgotPasswordWindow from "./Components/ForgotPasswordWindow";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { expenseAction } from "./store";
 export const Ctx = React.createContext();
 function App() {
   const [expense, setExpense] = useState([]);
+  const dispatch=useDispatch();
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios
@@ -24,6 +27,8 @@ function App() {
           }
         });
       setExpense(response);
+      dispatch(expenseAction.addExpense(response));
+      dispatch(expenseAction.expenseTotalInitial(response));
     };
     fetchData();
   }, []);
@@ -57,7 +62,7 @@ function App() {
   };
   useEffect(() => {
     handleContentLoaded();
-  }, []);
+  }, []); 
   return (
     <Ctx.Provider value={[expense, setExpense]}>
       <BrowserRouter>

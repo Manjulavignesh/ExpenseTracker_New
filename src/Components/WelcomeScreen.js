@@ -1,10 +1,17 @@
 import { Card } from "react-bootstrap";
 import Logout from "./Logout";
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import AddExpense from "./AddExpense";
 import axios from "axios";
 import { Ctx } from "../App"; 
+import { useDispatch, useSelector } from "react-redux";
+import { expenseAction } from "../store";
 const WelcomeScreen = () => {
+  const dispatch=useDispatch();
+  const expenses=useSelector((state)=>state.expense.expense);
+  const total=useSelector((state)=>state.expense.total);
+  console.log(expenses,total);
+  document.body.style.background = "white";
   const [expense,setExpense]=useContext(Ctx);
   const money = useRef();
   const description = useRef();
@@ -15,6 +22,8 @@ const WelcomeScreen = () => {
     const desRef = description.current.value;
     const catagoryRef = Catagory.current.value;
     const obj = { amt: moneyRef, reason: desRef, catagoryobj: catagoryRef };
+dispatch(expenseAction.addExpense(obj));
+dispatch(expenseAction.expenseTotal(moneyRef));
     axios
       .post(
         "https://expensetracker-authentic-6234a-default-rtdb.firebaseio.com/expense.json",
@@ -134,7 +143,7 @@ const WelcomeScreen = () => {
           marginTop: 10,
         }}
       >
-      <AddExpense expense={expense} />
+    <AddExpense expense={expense} />
       </Card>
     </div>
   );

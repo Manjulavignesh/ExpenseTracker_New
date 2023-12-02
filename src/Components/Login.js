@@ -1,13 +1,17 @@
 import { useRef, useState } from "react";
 import { Card } from "react-bootstrap";
-import ForgotPasswordWindow from "./ForgotPasswordWindow";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { authAction } from "../store";
 const Login = () => {
+  const dispatch=useDispatch();
+  const navigate=useNavigate();
   document.body.style.backgroundImage =
-  "url('https://wallpapercave.com/wp/Quyisg0.jpg')";
+    "url('https://wallpapercave.com/wp/Quyisg0.jpg')";
   const [newUser, setNewUser] = useState(false);
   const emailInput = useRef();
   const passwordInput = useRef();
-  const confirmPassword=useRef();
+  const confirmPassword = useRef();
   const LoginHandler = () => {
     setNewUser(false);
   };
@@ -19,40 +23,40 @@ const Login = () => {
     const Email = emailInput.current.value;
     const Password = passwordInput.current.value;
     if (newUser) {
-      if(Email.includes("@")!=true || Password.length<4 || confirmPassword.current.value<4)
-    {
-      let message1="1.Email must includes-@ symbol";
-      let message2="2.password & confirm password must contain 4 charcters";
+      if (
+        Email.includes("@") != true ||
+        Password.length < 4 ||
+        confirmPassword.current.value < 4
+      ) {
+        let message1 = "1.Email must includes-@ symbol";
+        let message2 = "2.password & confirm password must contain 4 charcters";
 
-      alert(`Please Enter Valid User Details \n ${message1}\n ${message2}`);
-    }
-    else{
-      fetch(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDTAr60Md60DA5Loqu7YAgbAbYNOMvo-7w",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            email: Email,
-            password: Password,
-            returnSecureToken: true,
-          }),
-          headers: { "content-type": "application/json" },
-        }
-      ).then((res) => {
-          if (res.ok) {
-            console.log("User has successfully signed up")
-          }
-          else
+        alert(`Please Enter Valid User Details \n ${message1}\n ${message2}`);
+      } else {
+        fetch(
+          "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDTAr60Md60DA5Loqu7YAgbAbYNOMvo-7w",
           {
-          throw new Error("Authentication Failed")
+            method: "POST",
+            body: JSON.stringify({
+              email: Email,
+              password: Password,
+              returnSecureToken: true,
+            }),
+            headers: { "content-type": "application/json" },
           }
-        })
-        .catch((err) => {
-          alert(err);
-        });
+        )
+          .then((res) => {
+            if (res.ok) {
+              console.log("User has successfully signed up");
+            } else {
+              throw new Error("Authentication Failed");
+            }
+          })
+          .catch((err) => {
+            alert(err);
+          });
       }
-    }
-    else{
+    } else {
       fetch(
         "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDTAr60Md60DA5Loqu7YAgbAbYNOMvo-7w",
         {
@@ -65,23 +69,27 @@ const Login = () => {
           headers: { "content-type": "application/json" },
         }
       )
-      .then((res) => {
+        .then((res) => {
           if (res.ok) {
-            window.location.href="http://localhost:3000/verifyEmail"
+        navigate("/verifyEmail");
             return res.json();
           } else {
             return res.json().then((data) => {
-              let errorMessage = "Wrong credential...Please check entered user details";
+              let errorMessage =
+                "Wrong credential...Please check entered user details";
               throw new Error(errorMessage);
             });
           }
         })
         .then((data) => {
+          dispatch(authAction.tokenUpdate(data.idToken));
+          dispatch(authAction.idUpdate(data.email));
           localStorage.setItem("token", data.idToken);
         })
         .catch((err) => {
           alert(err.message);
         });
+       
     }
   };
   return (
@@ -162,8 +170,15 @@ const Login = () => {
                 LogIn
               </button>
             )}
-            {!newUser && <a href="http://localhost:3000/forgotpassword" style={{padding:"0px 115px"}} >Forgot password</a>}
-            {newUser  && (
+            {!newUser && (
+              <a
+                href="http://localhost:3000/forgotpassword"
+                style={{ padding: "0px 115px" }}
+              >
+                Forgot password
+              </a>
+            )}
+            {newUser && (
               <button
                 style={{
                   width: "75%",

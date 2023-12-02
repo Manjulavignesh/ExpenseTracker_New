@@ -1,7 +1,15 @@
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { authAction } from "../store";
+
 const VerifyEmail = () => {
+  const token=useSelector((state)=>state.auth.token);
+  const id=useSelector((state)=>state.auth.userId);
+  const navigate=useNavigate();
+  const dispatch=useDispatch();
     document.body.style.background = "#271f1f";
     const verifyHandler=()=>{
-        const token=localStorage.getItem("token");
+const token=localStorage.getItem("token");
         fetch(
             "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDTAr60Md60DA5Loqu7YAgbAbYNOMvo-7w", {
                 method: "POST",
@@ -13,7 +21,8 @@ const VerifyEmail = () => {
               }
           ).then((res) => {
               if (res.ok) {
-                window.location.href="http://localhost:3000/welcomepage"
+                dispatch(authAction.login());
+                navigate("/welcomepage")
             return res.json();
               } else {
                 return res.json().then((data) => {
