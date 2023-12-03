@@ -7,12 +7,14 @@ import React, { useEffect, useState } from "react";
 import VerifyEmail from "./Components/VerifyEmail";
 import ForgotPasswordWindow from "./Components/ForgotPasswordWindow";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { expenseAction } from "./store";
+import { useDispatch, useSelector } from "react-redux";
+import { expenseAction, themeAction } from "./store";
 export const Ctx = React.createContext();
 function App() {
+  const dispatch = useDispatch();
+  const color = useSelector((state) => state.themes.color);
+  document.body.style.background = `${color}`;
   const [expense, setExpense] = useState([]);
-  const dispatch=useDispatch();
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios
@@ -29,6 +31,12 @@ function App() {
       setExpense(response);
       dispatch(expenseAction.addExpense(response));
       dispatch(expenseAction.expenseTotalInitial(response));
+      if (localStorage.getItem("premium") == "true")
+        dispatch(themeAction.premiumChange());
+      if (localStorage.getItem("theme") == "dark")
+        dispatch(themeAction.themeChange("#3d8ae8"));
+      else if (localStorage.getItem("theme") == "light")
+        dispatch(themeAction.themeChange("white"));
     };
     fetchData();
   }, []);
@@ -62,7 +70,7 @@ function App() {
   };
   useEffect(() => {
     handleContentLoaded();
-  }, []); 
+  }, []);
   return (
     <Ctx.Provider value={[expense, setExpense]}>
       <BrowserRouter>

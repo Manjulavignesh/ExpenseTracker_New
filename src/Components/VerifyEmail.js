@@ -7,7 +7,6 @@ const VerifyEmail = () => {
   const id=useSelector((state)=>state.auth.userId);
   const navigate=useNavigate();
   const dispatch=useDispatch();
-    document.body.style.background = "#271f1f";
     const verifyHandler=()=>{
 const token=localStorage.getItem("token");
         fetch(

@@ -94,22 +94,6 @@ const PrintExpense = (props) => {
         >
           Edit
         </button>
-       {total>10000 && <button
-          style={{
-            marginLeft:150,
-            marginTop:0,
-            width: 150,
-            height: 30,
-            borderRadius: "15px",
-            borderColor: "white",
-            background: "white",
-            fontWeight: 750,
-            fontSize: 15,
-          }}
-          onClick={editHandler}
-        >
-          Activate Premium
-        </button>}
       </h2>
     </div>}
     </div>

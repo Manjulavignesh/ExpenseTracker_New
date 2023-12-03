@@ -6,8 +6,6 @@ import { authAction } from "../store";
 const Login = () => {
   const dispatch=useDispatch();
   const navigate=useNavigate();
-  document.body.style.backgroundImage =
-    "url('https://wallpapercave.com/wp/Quyisg0.jpg')";
   const [newUser, setNewUser] = useState(false);
   const emailInput = useRef();
   const passwordInput = useRef();
@@ -96,7 +94,7 @@ const Login = () => {
     <div>
       <Card
         style={{
-          background: "white",
+          background: "pink",
           width: 350,
           height: 450,
           marginLeft: 600,
