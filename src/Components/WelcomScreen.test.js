@@ -5,5 +5,9 @@ describe("welcomescreen component",()=>{
         render(<WelcomeScreen/>)
         const outputElement=screen.getByText("welcome",{exact:false});
         expect(outputElement).toBeInTheDocument()
+    }),
+    test(" renders contact details",()=>{
+        render(<WelcomeScreen/>)
+        expect(screen.getByRole('link', { name: 'Complete now' })).toHaveAttribute('href', 'http://localhost:3000/profile')
     })
 })

@@ -60,7 +60,7 @@ const WelcomeScreen = () => {
   };
   return (
     <div>
-      {premium && (
+      {premium  &&(
         <div style={{ float: "right", marginTop: 7 }}>
           <ReactSwitch onChange={changeHandler} checked={color == "#3d8ae8"} />
         </div>
@@ -188,7 +188,7 @@ const WelcomeScreen = () => {
               Activate Premium
             </button>
           )}
-          {premium && (
+          {premium  && (
             <button
               style={{
                 float: "right",
