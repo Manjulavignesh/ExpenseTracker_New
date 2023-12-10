@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Card } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { authAction } from "../store";
+import { authAction } from "../store/index.js";
 const Login = () => {
   const dispatch=useDispatch();
   const navigate=useNavigate();

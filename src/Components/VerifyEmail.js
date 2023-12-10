@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { authAction } from "../store";
+import { authAction } from "../store/index.js";
 
 const VerifyEmail = () => {
   const token=useSelector((state)=>state.auth.token);

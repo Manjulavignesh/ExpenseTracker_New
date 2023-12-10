@@ -1,14 +1,14 @@
-import Login from "./Components/Login";
+import Login from "./Components/Login.js";
 import { Route, Routes } from "react-router-dom";
-import WelcomeScreen from "./Components/WelcomeScreen";
+import WelcomeScreen from "./Components/WelcomeScreen.js";
 import { BrowserRouter } from "react-router-dom";
-import Updateprofile from "./Components/UpdateProfile";
+import Updateprofile from "./Components/UpdateProfile.js";
 import React, { useEffect, useState } from "react";
-import VerifyEmail from "./Components/VerifyEmail";
-import ForgotPasswordWindow from "./Components/ForgotPasswordWindow";
+import VerifyEmail from "./Components/VerifyEmail.js";
+import ForgotPasswordWindow from "./Components/ForgotPasswordWindow.js";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { expenseAction, themeAction } from "./store";
+import { expenseAction, themeAction } from "./store/index.js";
 export const Ctx = React.createContext();
 function App() {
   const dispatch = useDispatch();

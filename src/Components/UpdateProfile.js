@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import { Card } from "react-bootstrap";
-import { AiFillGithub } from "react-icons/ai";
-import { AiOutlineGlobal } from "react-icons/ai";
-import Logout from "./Logout";
+import Logout from "./Logout.js";
+import { AiFillGithub } from "react-icons/ai/index.esm.js";
+import { AiOutlineGlobal } from "react-icons/ai/index.esm.js";
 const Updateprofile = () => {
   const name = useRef();
   const url = useRef();

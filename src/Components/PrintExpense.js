@@ -1,7 +1,7 @@
-import axios from "axios";
 import { useContext } from "react";
-import { Ctx } from "../App";
+import { Ctx } from "../App.js";
 import { useSelector } from "react-redux";
+import axios from "axios";
 const PrintExpense = (props) => {
   const total=useSelector((state)=>state.expense.total)
   console.log(total);

@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import PrintExpense from "./PrintExpense";
-import { Ctx } from "../App";
+import PrintExpense from "./PrintExpense.js";
+import { Ctx } from "../App.js";
 
 const AddExpense = (props) => {
     const [expense]=useContext(Ctx);

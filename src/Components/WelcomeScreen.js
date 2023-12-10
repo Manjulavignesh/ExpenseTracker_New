@@ -1,13 +1,13 @@
 import { Card } from "react-bootstrap";
-import Logout from "./Logout";
+import Logout from "./Logout.js";
 import { useContext, useRef } from "react";
-import AddExpense from "./AddExpense";
-import axios from "axios";
-import { Ctx } from "../App";
+import AddExpense from "./AddExpense.js";
+import { Ctx } from "../App.js";
 import { useDispatch, useSelector } from "react-redux";
-import { expenseAction, themeAction } from "../store";
+import { expenseAction, themeAction } from "../store/index.js";
 import ReactSwitch from "react-switch";
 import exportFromJSON from "export-from-json";
+import axios from "axios";
 const WelcomeScreen = () => {
   const dispatch = useDispatch();
   const expenses = useSelector((state) => state.expense.expense);
